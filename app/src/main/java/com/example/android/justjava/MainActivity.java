@@ -29,19 +29,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /**
-     * This method is called when the order button is clicked.
-     */
-    public void submitOrder(View view) {
+    void increment(View view) {
         if (this.quantity == Integer.MAX_VALUE) {
             this.quantity = 0;
         }
         display(++this.quantity);
+    }
 
+    void decrement(View view) {
+        if (this.quantity == 0) {
+            this.quantity = 0;
+            display(this.quantity);
+        } else {
+            display(--this.quantity);
+        }
+    }
+
+    /**
+     * This method is called when the order button is clicked.
+     */
+    void submitOrder(View view) {
         if (this.quantity * COFFEE_PRICE < Double.MAX_VALUE) {
             displayPrice((this.quantity * COFFEE_PRICE));
         }
-
     }
 
     /**
@@ -49,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void display(int number) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText(number);
+        quantityTextView.setText("" + number);
     }
 
     /**
