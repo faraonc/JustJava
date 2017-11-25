@@ -22,11 +22,28 @@
         android:textColor="@android:color/black"
         android:textSize="16sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textAllCaps="true"
+        android:text="@string/price_label" />
+
+    <TextView
+        android:id="@+id/price_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/price"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:textAllCaps="true"
-        android:text="@string/order_button" />
+        android:text="@string/order_button"
+        android:onClick="submitOrder"/>
 
 </LinearLayout>
