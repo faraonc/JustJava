@@ -33,16 +33,26 @@ public class MainActivity extends AppCompatActivity {
         if (this.quantity == Integer.MAX_VALUE) {
             this.quantity = 0;
         }
-        display(++this.quantity);
+        displayQuantity(++this.quantity);
     }
 
     void decrement(View view) {
         if (this.quantity == 0) {
             this.quantity = 0;
-            display(this.quantity);
+            displayQuantity(this.quantity);
         } else {
-            display(--this.quantity);
+            displayQuantity(--this.quantity);
         }
+    }
+
+    /**
+     * Calculates the price of the order based on the current quantity.
+     *
+     * @return the price
+     */
+    private double calculatePrice(int quantity) {
+        int price = quantity * COFFEE_PRICE;
+        return price;
     }
 
     /**
@@ -57,17 +67,21 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int quantity) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText(String.valueOf(quantity));
     }
 
     /**
      * This method displays the given price on the screen.
      */
-    private void displayPrice(double number) {
+    private void displayPrice(double price) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText("Total: " + NumberFormat.getCurrencyInstance().format(number) + "\nThank you!");
+        if (price > 0) {
+            priceTextView.setText("Total: " + NumberFormat.getCurrencyInstance().format(price) + "\nThank you!");
+        } else {
+            priceTextView.setText(NumberFormat.getCurrencyInstance().format(0));
+        }
     }
 
     /**
