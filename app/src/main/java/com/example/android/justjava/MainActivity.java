@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    void increment(View view) {
+    public void increment(View view) {
         if (this.quantity == Integer.MAX_VALUE) {
             this.quantity = 0;
         }
         displayQuantity(++this.quantity);
     }
 
-    void decrement(View view) {
+    public void decrement(View view) {
         if (this.quantity == 0) {
             this.quantity = 0;
             displayQuantity(this.quantity);
@@ -46,49 +46,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * This method is called when the order button is clicked.
+     */
+    public void submitOrder(View view) {
+        if (this.quantity * COFFEE_PRICE < Double.MAX_VALUE) {
+            displayPrice(calculatePrice());
+        }
+    }
+
+    /**
      * Calculates the price of the order based on the current quantity.
      *
      * @return the price
      */
-    private double calculatePrice(int quantity) {
-        int price = quantity * COFFEE_PRICE;
-        return price;
-    }
-
-    /**
-     * This method is called when the order button is clicked.
-     */
-    void submitOrder(View view) {
-        if (this.quantity * COFFEE_PRICE < Double.MAX_VALUE) {
-            displayPrice((this.quantity * COFFEE_PRICE));
-        }
+    private double calculatePrice() {
+        return this.quantity * COFFEE_PRICE;
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void displayQuantity(int quantity) {
+    private void displayQuantity(int numberOfCoffee) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText(String.valueOf(quantity));
+        quantityTextView.setText(String.valueOf(numberOfCoffee));
     }
 
     /**
      * This method displays the given price on the screen.
      */
     private void displayPrice(double price) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
         if (price > 0) {
-            priceTextView.setText("Total: " + NumberFormat.getCurrencyInstance().format(price) + "\nThank you!");
+            orderSummaryTextView.setText(createOrderSummary(price));
         } else {
-            priceTextView.setText(NumberFormat.getCurrencyInstance().format(0));
+            orderSummaryTextView.setText(NumberFormat.getCurrencyInstance().format(0));
         }
     }
 
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+    private String createOrderSummary(double price){
+        String customer = "Kaptain Kunal";
+        return "Name: " + customer +
+                "\nQuantity: " + this.quantity +
+                "\nTotal: " + NumberFormat.getCurrencyInstance().format(price) +
+                "\nThank you!";
     }
+
 }
