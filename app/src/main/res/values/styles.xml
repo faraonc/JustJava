@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="purpleCheckBox">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <!--<item name="buttonTint"></item>-->
+    </style>
+
 </resources>
